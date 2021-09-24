@@ -1,6 +1,6 @@
 # Deep Learning with PyTorch
 
-This repo contains notebooks and is based on code for Udacity's Deep Learning with PyTorch lesson. Modified and extended by P. Huttunen 12/2020. 
+This repo contains notebooks and is based on code for Udacity's Deep Learning with PyTorch lesson. 
 
 * **Part 1:** Introduction to PyTorch and using tensors
 * **Part 2:** Building fully-connected neural networks with PyTorch

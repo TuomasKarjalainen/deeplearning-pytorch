@@ -1,0 +1,1182 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Part 7 - Loading Image Data (Exercises)}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{loading-image-data}{%
+\section{Loading Image Data}\label{loading-image-data}}
+
+So far we've been working with fairly artificial datasets that you
+wouldn't typically be using in real projects. Instead, you'll likely be
+dealing with full-sized images like you'd get from smart phone cameras.
+In this notebook, we'll look at how to load images and use them to train
+neural networks.
+
+We'll be using a \href{https://www.kaggle.com/c/dogs-vs-cats}{dataset of
+cat and dog photos} available from Kaggle. Here are a couple example
+images:
+
+We'll use this dataset to train a neural network that can differentiate
+between cats and dogs. These days it doesn't seem like a big
+accomplishment, but five years ago it was a serious challenge for
+computer vision systems.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{config} InlineBackend.figure\PYZus{}format = \PYZsq{}retina\PYZsq{}
+        
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{from} \PY{n+nn}{torchvision} \PY{k}{import} \PY{n}{datasets}\PY{p}{,} \PY{n}{transforms}
+        
+        \PY{k+kn}{import} \PY{n+nn}{helper}
+\end{Verbatim}
+
+
+    The easiest way to load image data is with \texttt{datasets.ImageFolder}
+from \texttt{torchvision}
+(\href{http://pytorch.org/docs/master/torchvision/datasets.html\#imagefolder}{documentation}).
+In general you'll use \texttt{ImageFolder} like so:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataset }\OperatorTok{=}\NormalTok{ datasets.ImageFolder(}\StringTok{'path/to/data'}\NormalTok{, transform}\OperatorTok{=}\NormalTok{transform)}
+\end{Highlighting}
+\end{Shaded}
+
+where \texttt{\textquotesingle{}path/to/data\textquotesingle{}} is the
+file path to the data directory and \texttt{transform} is a list of
+processing steps built with the
+\href{http://pytorch.org/docs/master/torchvision/transforms.html}{\texttt{transforms}}
+module from \texttt{torchvision}. ImageFolder expects the files and
+directories to be constructed like so:
+
+\begin{verbatim}
+root/dog/xxx.png
+root/dog/xxy.png
+root/dog/xxz.png
+
+root/cat/123.png
+root/cat/nsdf3.png
+root/cat/asd932_.png
+\end{verbatim}
+
+where each class has it's own directory (\texttt{cat} and \texttt{dog})
+for the images. The images are then labeled with the class taken from
+the directory name. So here, the image \texttt{123.png} would be loaded
+with the class label \texttt{cat}. You can download the dataset already
+structured like this
+\href{https://s3.amazonaws.com/content.udacity-data.com/nd089/Cat_Dog_data.zip}{from
+here}. I've also split it into a training set and test set.
+
+\begin{quote}
+\textbf{Note.} When using https://notebooks.dclabra.fi/ -environment, do
+not download dataset to your own Docker container, but use shared folder
+\texttt{/home/jovyan/work/cat\_dog/} instead!
+\end{quote}
+
+\hypertarget{transforms}{%
+\subsubsection{Transforms}\label{transforms}}
+
+When you load in the data with \texttt{ImageFolder}, you'll need to
+define some transforms. For example, the images are different sizes but
+we'll need them to all be the same size for training. You can either
+resize them with \texttt{transforms.Resize()} or crop with
+\texttt{transforms.CenterCrop()},
+\texttt{transforms.RandomResizedCrop()}, etc. We'll also need to convert
+the images to PyTorch tensors with \texttt{transforms.ToTensor()}.
+Typically you'll combine these transforms into a pipeline with
+\texttt{transforms.Compose()}, which accepts a list of transforms and
+runs them in sequence. It looks something like this to scale, then crop,
+then convert to a tensor:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{transform }\OperatorTok{=}\NormalTok{ transforms.Compose([transforms.Resize(}\DecValTok{255}\NormalTok{),}
+\NormalTok{                                 transforms.CenterCrop(}\DecValTok{224}\NormalTok{),}
+\NormalTok{                                 transforms.ToTensor()])}
+\end{Highlighting}
+\end{Shaded}
+
+There are plenty of transforms available, I'll cover more in a bit and
+you can read through the
+\href{http://pytorch.org/docs/master/torchvision/transforms.html}{documentation}.
+
+\hypertarget{data-loaders}{%
+\subsubsection{Data Loaders}\label{data-loaders}}
+
+With the \texttt{ImageFolder} loaded, you have to pass it to a
+\href{http://pytorch.org/docs/master/data.html\#torch.utils.data.DataLoader}{\texttt{DataLoader}}.
+The \texttt{DataLoader} takes a dataset (such as you would get from
+\texttt{ImageFolder}) and returns batches of images and the
+corresponding labels. You can set various parameters like the batch size
+and if the data is shuffled after each epoch.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dataloader }\OperatorTok{=}\NormalTok{ torch.utils.data.DataLoader(dataset, batch_size}\OperatorTok{=}\DecValTok{32}\NormalTok{, shuffle}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Here \texttt{dataloader} is a
+\href{https://jeffknupp.com/blog/2013/04/07/improve-your-python-yield-and-generators-explained/}{generator}.
+To get data out of it, you need to loop through it or convert it to an
+iterator and call \texttt{next()}.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Looping through it, get a batch on each loop }
+\ControlFlowTok{for}\NormalTok{ images, labels }\KeywordTok{in}\NormalTok{ dataloader:}
+    \ControlFlowTok{pass}
+
+\CommentTok{# Get one batch}
+\NormalTok{images, labels }\OperatorTok{=} \BuiltInTok{next}\NormalTok{(}\BuiltInTok{iter}\NormalTok{(dataloader))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+\textbf{Exercise 7.1:} Load images from the
+\texttt{Cat\_Dog\_data/train} folder, define a few transforms, then
+build the dataloader.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Exercise 7.1:}
+        
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{} TODO: set correct path here}
+        \PY{n}{data\PYZus{}dir} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/jovyan/work/cat\PYZus{}dog/}\PY{l+s+s1}{\PYZsq{}} 
+        
+        \PY{c+c1}{\PYZsh{} TODO: compose transforms here}
+        \PY{n}{transform} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}\PY{p}{[}\PY{n}{transforms}\PY{o}{.}\PY{n}{Resize}\PY{p}{(}\PY{l+m+mi}{255}\PY{p}{)}\PY{p}{,}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{CenterCrop}\PY{p}{(}\PY{l+m+mi}{244}\PY{p}{)}\PY{p}{,}
+                                        \PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} TODO: create the ImageFolder}
+        \PY{n}{dataset} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{ImageFolder}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/jovyan/work/cat\PYZus{}dog/Cat\PYZus{}Dog\PYZus{}data/train/}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{transform} \PY{o}{=} \PY{n}{transform}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} TODO: use the ImageFolder dataset to create the DataLoader}
+        \PY{n}{dataloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{dataset}\PY{p}{,} \PY{n}{batch\PYZus{}size} \PY{o}{=} \PY{l+m+mi}{32}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{} Run this to test your data loader}
+        \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n+nb}{iter}\PY{p}{(}\PY{n}{dataloader}\PY{p}{)}\PY{p}{)}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ax} \PY{o}{=} \PY{n}{axes}\PY{p}{[}\PY{n}{ii}\PY{p}{]}
+            \PY{n}{helper}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{n}{ii}\PY{p}{]}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_4_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s2}{batch, color channels ja kuvan koko}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+torch.Size([3, 244, 244])
+
+batch, color channels ja kuvan koko
+
+torch.Size([32, 3, 244, 244])
+torch.Size([32])
+
+    \end{Verbatim}
+
+    If you loaded the data correctly, you should see something like this
+(your image will be different):
+
+    \hypertarget{data-augmentation}{%
+\subsection{Data Augmentation}\label{data-augmentation}}
+
+A common strategy for training neural networks is to introduce
+randomness in the input data itself. For example, you can randomly
+rotate, mirror, scale, and/or crop your images during training. This
+will help your network generalize as it's seeing the same images but in
+different locations, with different sizes, in different orientations,
+etc.
+
+To randomly rotate, scale and crop, then flip your images you would
+define your transforms like this:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{train_transforms }\OperatorTok{=}\NormalTok{ transforms.Compose([transforms.RandomRotation(}\DecValTok{30}\NormalTok{),}
+\NormalTok{                                       transforms.RandomResizedCrop(}\DecValTok{224}\NormalTok{),}
+\NormalTok{                                       transforms.RandomHorizontalFlip(),}
+\NormalTok{                                       transforms.ToTensor(),}
+\NormalTok{                                       transforms.Normalize([}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{], }
+\NormalTok{                                                            [}\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{, }\FloatTok{0.5}\NormalTok{])])}
+\end{Highlighting}
+\end{Shaded}
+
+You'll also typically want to normalize images with
+\texttt{transforms.Normalize}. You pass in a list of means and list of
+standard deviations, then the color channels are normalized like so
+
+\texttt{input{[}channel{]}\ =\ (input{[}channel{]}\ -\ mean{[}channel{]})\ /\ std{[}channel{]}}
+
+Subtracting \texttt{mean} centers the data around zero and dividing by
+\texttt{std} squishes the values to be between -1 and 1. Normalizing
+helps keep the network work weights near zero which in turn makes
+backpropagation more stable. Without normalization, networks will tend
+to fail to learn.
+
+You can find a list of all
+\href{http://pytorch.org/docs/0.3.0/torchvision/transforms.html}{the
+available transforms here}. When you're testing however, you'll want to
+use images that aren't altered (except you'll need to normalize the same
+way). So, for validation/test images, you'll typically just resize and
+crop.
+
+\begin{quote}
+\textbf{Exercise 7.2:} Define transforms for training data and testing
+data below. Leave off normalization for now.
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{c+c1}{\PYZsh{}\PYZsh{} Exercise 7.2:}
+        \PY{c+c1}{\PYZsh{}\PYZsh{} Note: Do not use normalization. }
+        
+        \PY{n}{data\PYZus{}dir} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/home/jovyan/work/cat\PYZus{}dog/Cat\PYZus{}Dog\PYZus{}data/}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} TODO: Define transforms for the training data and testing data}
+        
+        \PY{c+c1}{\PYZsh{} Harjoitusdata satunnaistetaan}
+        
+        \PY{n}{train\PYZus{}transforms} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}\PY{p}{[}\PY{n}{transforms}\PY{o}{.}\PY{n}{RandomRotation}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{transforms}\PY{o}{.}\PY{n}{RandomResizedCrop}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{transforms}\PY{o}{.}\PY{n}{RandomHorizontalFlip}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                              \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,}
+                                                                   \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+        
+        \PY{n}{test\PYZus{}transforms} \PY{o}{=} \PY{n}{transforms}\PY{o}{.}\PY{n}{Compose}\PY{p}{(}\PY{p}{[}\PY{n}{transforms}\PY{o}{.}\PY{n}{RandomRotation}\PY{p}{(}\PY{l+m+mi}{30}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{transforms}\PY{o}{.}\PY{n}{RandomResizedCrop}\PY{p}{(}\PY{l+m+mi}{224}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{transforms}\PY{o}{.}\PY{n}{RandomHorizontalFlip}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{transforms}\PY{o}{.}\PY{n}{ToTensor}\PY{p}{(}\PY{p}{)}\PY{p}{,}
+                                             \PY{n}{transforms}\PY{o}{.}\PY{n}{Normalize}\PY{p}{(}\PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{,}
+                                                                  \PY{p}{[}\PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{,} \PY{l+m+mf}{0.5}\PY{p}{]}\PY{p}{)}\PY{p}{]}\PY{p}{)}
+                                             
+        
+        \PY{c+c1}{\PYZsh{} Pass transforms in here, then run the next cell to see how the transforms look}
+        \PY{n}{train\PYZus{}data} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{ImageFolder}\PY{p}{(}\PY{n}{data\PYZus{}dir} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{train\PYZus{}transforms}\PY{p}{)}
+        \PY{n}{test\PYZus{}data} \PY{o}{=} \PY{n}{datasets}\PY{o}{.}\PY{n}{ImageFolder}\PY{p}{(}\PY{n}{data\PYZus{}dir} \PY{o}{+} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{/test}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{transform}\PY{o}{=}\PY{n}{test\PYZus{}transforms}\PY{p}{)}
+        
+        \PY{n}{trainloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{)}
+        \PY{n}{testloader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{c+c1}{\PYZsh{} change this to the trainloader or testloader }
+        \PY{n}{data\PYZus{}iter} \PY{o}{=} \PY{n+nb}{iter}\PY{p}{(}\PY{n}{trainloader}\PY{p}{)}
+        
+        \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{data\PYZus{}iter}\PY{p}{)}
+        \PY{n}{fig}\PY{p}{,} \PY{n}{axes} \PY{o}{=} \PY{n}{plt}\PY{o}{.}\PY{n}{subplots}\PY{p}{(}\PY{n}{figsize}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{,} \PY{n}{ncols}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{k}{for} \PY{n}{ii} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}\PY{p}{:}
+            \PY{n}{ax} \PY{o}{=} \PY{n}{axes}\PY{p}{[}\PY{n}{ii}\PY{p}{]}
+            \PY{n}{helper}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{n}{ii}\PY{p}{]}\PY{p}{,} \PY{n}{ax}\PY{o}{=}\PY{n}{ax}\PY{p}{,} \PY{n}{normalize}\PY{o}{=}\PY{k+kc}{False}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+Clipping input data to the valid range for imshow with RGB data ([0..1] for floats or [0..255] for integers).
+
+    \end{Verbatim}
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_9_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    Your transformed images should look something like this.
+
+Training examples:
+
+Testing examples:
+
+    At this point you should be able to load data for training and testing.
+Now, you should try building a network that can classify cats vs dogs.
+This is quite a bit more complicated than before with the MNIST and
+Fashion-MNIST datasets. To be honest, you probably won't get it to work
+with a fully-connected network, no matter how deep. These images have
+three color channels and at a higher resolution (so far you've seen
+28x28 images which are tiny).
+
+In the next part, I'll show you how to use a pre-trained network to
+build a model that can actually solve this problem.
+
+    \hypertarget{optional-todo}{%
+\section{Optional TODO:}\label{optional-todo}}
+
+\hypertarget{attempt-to-build-a-network-to-classify-cats-vs-dogs-from-this-dataset}{%
+\paragraph{Attempt to build a network to classify cats vs dogs from this
+dataset}\label{attempt-to-build-a-network-to-classify-cats-vs-dogs-from-this-dataset}}
+
+    \hypertarget{printataan-datan-ominaisuudet-esille}{%
+\subparagraph{Printataan datan ominaisuudet
+esille}\label{printataan-datan-ominaisuudet-esille}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{labels}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+torch.Size([3, 224, 224])
+torch.Size([32, 3, 224, 224])
+torch.Size([32])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}images = images.view(images.shape[0], \PYZhy{}1)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{images}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+torch.Size([32, 3, 224, 224])
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn} \PY{k}{as} \PY{n+nn}{nn}
+        \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+\end{Verbatim}
+
+
+    \hypertarget{section}{%
+\subsubsection{--------------------------------------------------------------------------------------------------------}\label{section}}
+
+Kuvantunnistukseen tarkoitetut neuroverkot ovat pääsääntöisesti
+yhdistelmiä kuvan ominaisuuksien (features) etsimiseen ja
+päätöksentekoon (classification) tarkoitetuista neuroverkosta. Kuvan
+ominaisuuksien tunnistamiseen käytetyt menetelmät ovat pääsääntöisesti
+yleistyksiä perinteisistä kuvankäsittelymenetelmistä, mutta niissä
+käytettävät suodattimet (filters) opetetaan käyttäen syväoppimista.
+Päätöksentekoon taas käytetään yleisesti täysin kytkettyjä (FC)
+neuroverkkoja ja softmax -funktiota.
+
+Syy, miksi kuvankäsittelyyn ei käytetä täysin kytkettyjä neuroverkkoja
+(FC), on kuvapikselien suuri lukumäärä ja sen myötä verkon nopea
+kasvaminen todella suureksi. Tyypillisessä luokitteluun käytettävässä
+kuvassa on esim. 3x 224x224 = 150 528 pikseliä. Jos nämä kaikki
+kytkettäisiin vaikka 512 neuroniin ensimmäisellä kerroksella, jo tähän
+yhteen kerrokseen tulisi 512 x 150 528 + 512 \textasciitilde{} 77M
+parametria, joka on enemmän kuin AlexNet -verkossa. Vertailun vuoksi
+vaikkapa VGG-16 verkossa on ensimmäisellä konvoluutiokerroksella 64x 3x3
+= 576 parametria. \#\#\#
+--------------------------------------------------------------------------------------------------------
+
+    \hypertarget{model}{%
+\section{Model}\label{model}}
+
+    Lähdin kokeilemaan kissakoiradatan luokittelua konvoluutuoverkoilla ja
+kokeilin useampaa eri versioita. Isoja eroja testaamieni versioiden
+välillä ei löytynyt. Mikään verkko ei lähtenyt kunnolla oppimaan.
+Verkkojen tarkkuus vaihteli 50-60 \% välillä. Yli 60\% tarkkuutta en
+onnistunut saamaan kertaakaan. Tämän olisi voinut toteuttaa valmiilla
+verkolla, joka on valmiiksi koulutettu, mutta se olisi ollut tylsempää
+ja siinä tuskin olisi oppinut yhtä paljon.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{c+c1}{\PYZsh{} from torch.nn import Module, Conv2d, Linear, MaxPool2d, AdaptiveAvgPool1d}
+         \PY{c+c1}{\PYZsh{} from torch.nn.functional import relu, dropout}
+         
+         \PY{k}{class} \PY{n+nc}{Network}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{Network}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}3} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{MaxPool2d}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{adPooling} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{AdaptiveAvgPool1d}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{)}
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{softmax} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Softmax}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Dropout}\PY{p}{(}\PY{p}{)}
+                 
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{out} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+             
+         
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}1}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}2}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}3}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}x = x.view(x.shape[0], \PYZhy{}1)}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{adPooling}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{}x = F.log\PYZus{}softmax(self.out(x), dim=1)}
+                 
+                 \PY{k}{return} \PY{n}{F}\PY{o}{.}\PY{n}{log\PYZus{}softmax}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{out}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{model} \PY{o}{=} \PY{n}{Network}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{parameters}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<bound method Module.parameters of Network(
+  (conv\_1): Conv2d(3, 64, kernel\_size=(5, 5), stride=(1, 1))
+  (conv\_2): Conv2d(64, 128, kernel\_size=(3, 3), stride=(1, 1))
+  (conv\_3): Conv2d(128, 256, kernel\_size=(5, 5), stride=(1, 1))
+  (maxPooling): MaxPool2d(kernel\_size=4, stride=4, padding=0, dilation=1, ceil\_mode=False)
+  (adPooling): AdaptiveAvgPool1d(output\_size=256)
+  (relu): ReLU()
+  (softmax): Softmax(dim=1)
+  (dropout): Dropout(p=0.5, inplace=False)
+  (fc1): Linear(in\_features=256, out\_features=128, bias=True)
+  (fc2): Linear(in\_features=128, out\_features=64, bias=True)
+  (out): Linear(in\_features=64, out\_features=2, bias=True)
+)>
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{k+kn}{from} \PY{n+nn}{torch} \PY{k}{import} \PY{n}{nn}\PY{p}{,} \PY{n}{optim}
+         \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+         
+         \PY{k}{class} \PY{n+nc}{Network2}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{Network2}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}3} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{MaxPool2d}\PY{p}{(}\PY{l+m+mi}{4}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{adPooling} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{AdaptiveAvgPool1d}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{)}
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{softmax} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Softmax}\PY{p}{(}\PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Dropout}\PY{p}{(}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{ReLU}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{256}\PY{p}{,} \PY{l+m+mi}{128}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{128}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{out} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                 
+                 
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,} \PY{n}{x}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{maxPooling}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv\PYZus{}3}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{x}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{adPooling}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{o}{.}\PY{n}{squeeze}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 
+                 
+                 \PY{n}{x} \PY{o}{=} \PY{n}{F}\PY{o}{.}\PY{n}{log\PYZus{}softmax}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{out}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{,} \PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n}{x}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{model3} \PY{o}{=} \PY{n}{Network2}\PY{p}{(}\PY{p}{)}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model3}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Network2(
+  (conv\_1): Conv2d(3, 64, kernel\_size=(5, 5), stride=(1, 1))
+  (conv\_2): Conv2d(64, 128, kernel\_size=(3, 3), stride=(1, 1))
+  (conv\_3): Conv2d(128, 256, kernel\_size=(5, 5), stride=(1, 1))
+  (maxPooling): MaxPool2d(kernel\_size=4, stride=4, padding=0, dilation=1, ceil\_mode=False)
+  (adPooling): AdaptiveAvgPool1d(output\_size=256)
+  (softmax): Softmax(dim=1)
+  (dropout): Dropout(p=0.5, inplace=False)
+  (relu): ReLU()
+  (fc1): Linear(in\_features=256, out\_features=128, bias=True)
+  (fc2): Linear(in\_features=128, out\_features=64, bias=True)
+  (out): Linear(in\_features=64, out\_features=2, bias=True)
+)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} Tehdään vielä kolmas konvoluutioverkko }
+         \PY{k+kn}{import} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{nn}\PY{n+nn}{.}\PY{n+nn}{functional} \PY{k}{as} \PY{n+nn}{F}
+         
+         \PY{k}{class} \PY{n+nc}{Network3}\PY{p}{(}\PY{n}{nn}\PY{o}{.}\PY{n}{Module}\PY{p}{)}\PY{p}{:}
+             \PY{k}{def} \PY{n+nf}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+                 \PY{n+nb}{super}\PY{p}{(}\PY{n}{Network3}\PY{p}{,} \PY{n+nb+bp}{self}\PY{p}{)}\PY{o}{.}\PY{n+nf+fm}{\PYZus{}\PYZus{}init\PYZus{}\PYZus{}}\PY{p}{(}\PY{p}{)}
+                 \PY{c+c1}{\PYZsh{} Määritellään taas kerrokset konvoluutioverkolle}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{MaxPool2d}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{16}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv3} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Conv2d}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{64}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{n}{padding}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{64} \PY{o}{*} \PY{l+m+mi}{28} \PY{o}{*} \PY{l+m+mi}{28}\PY{p}{,} \PY{l+m+mi}{32}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Linear}\PY{p}{(}\PY{l+m+mi}{32}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{Dropout}\PY{p}{(}\PY{l+m+mf}{0.2}\PY{p}{)}
+                 \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}norm} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{BatchNorm1d}\PY{p}{(}\PY{n}{num\PYZus{}features}\PY{o}{=}\PY{l+m+mi}{32}\PY{p}{)}
+                 
+             \PY{k}{def} \PY{n+nf}{forward}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{,}\PY{n}{x}\PY{p}{)}\PY{p}{:}
+                 \PY{c+c1}{\PYZsh{} Määritellään verkon järjestys taas}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv2}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{pool}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{conv3}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n}{x}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{n}{x}\PY{o}{.}\PY{n}{size}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} x = x.view(1, x.size()[0], \PYZhy{}1)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{dropout}\PY{p}{(}\PY{n}{F}\PY{o}{.}\PY{n}{relu}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{batch\PYZus{}norm}\PY{p}{(}\PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc1}\PY{p}{(}\PY{n}{x}\PY{p}{)}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+                 \PY{n}{x} \PY{o}{=} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{fc2}\PY{p}{(}\PY{n}{x}\PY{p}{)}
+                 
+                 \PY{k}{return} \PY{n}{x}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{model}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Network(
+  (conv\_1): Conv2d(3, 64, kernel\_size=(5, 5), stride=(1, 1))
+  (conv\_2): Conv2d(64, 128, kernel\_size=(3, 3), stride=(1, 1))
+  (conv\_3): Conv2d(128, 256, kernel\_size=(5, 5), stride=(1, 1))
+  (maxPooling): MaxPool2d(kernel\_size=4, stride=4, padding=0, dilation=1, ceil\_mode=False)
+  (adPooling): AdaptiveAvgPool1d(output\_size=256)
+  (relu): ReLU()
+  (softmax): Softmax(dim=1)
+  (dropout): Dropout(p=0.5, inplace=False)
+  (fc1): Linear(in\_features=256, out\_features=128, bias=True)
+  (fc2): Linear(in\_features=128, out\_features=64, bias=True)
+  (out): Linear(in\_features=64, out\_features=2, bias=True)
+)
+
+    \end{Verbatim}
+
+    \hypertarget{vaihdetaan-laskenta-cpulta-gpulle}{%
+\paragraph{Vaihdetaan laskenta CPU:lta
+GPU:lle}\label{vaihdetaan-laskenta-cpulta-gpulle}}
+
+Eli vaihdetaan laskenta perinteiseltä prosessorilta CUDA:lle, eli
+näytönohjaimen grafiikkasuorittimelle, jotta laskenta olisi nopeampaa
+rinnakkailaskennan ansioista.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{c+c1}{\PYZsh{} Tällä tarkisteaan, löytyykö Nvidian kehittämä CUDA\PYZhy{}rajapinta/alusta}
+         \PY{c+c1}{\PYZsh{} CUDA on siis tarkoitettu GPU\PYZhy{}laskentaan}
+         \PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{is\PYZus{}available}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}14}]:} True
+\end{Verbatim}
+            
+    \textbf{True} =\textgreater{} näytönohjain ja CUDA-ominaisuus löytyy
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{c+c1}{\PYZsh{} Määritetään device eli valitaan laskentaan GPU CPU:n sijasta}
+         \PY{n}{device} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{device}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cuda:0}\PY{l+s+s1}{\PYZsq{}} \PY{k}{if} \PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{is\PYZus{}available}\PY{p}{(}\PY{p}{)} \PY{k}{else} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{device}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:} device(type='cuda', index=0)
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{c+c1}{\PYZsh{} Tämän hetkinen käytössä oleva suoritin}
+         \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Device using: }\PY{l+s+si}{\PYZob{}device\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Device using: cuda:0
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{c+c1}{\PYZsh{} Määritän verkon, jonka valitsen käyttöön}
+         
+         \PY{c+c1}{\PYZsh{}model = Conv()}
+         \PY{c+c1}{\PYZsh{}model = Network()}
+         \PY{c+c1}{\PYZsh{}model = Network2()}
+         \PY{n}{model} \PY{o}{=} \PY{n}{Network3}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}model = Net()}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k+kn}{import} \PY{n+nn}{time}
+         \PY{k}{for} \PY{n}{device} \PY{o+ow}{in} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cpu}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cuda}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{:}
+             \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{CrossEntropyLoss}\PY{p}{(}\PY{p}{)}
+            \PY{c+c1}{\PYZsh{} criterion = nn.NLLLoss()}
+            \PY{c+c1}{\PYZsh{} optimizer = optim.Adam(model.parameters(), lr=0.001)}
+             \PY{n}{optimizer} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{SGD}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr} \PY{o}{=} \PY{l+m+mf}{0.03}\PY{p}{)}
+             \PY{n}{model}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+         
+             \PY{k}{for} \PY{n}{ii}\PY{p}{,} \PY{p}{(}\PY{n}{images}\PY{p}{,} \PY{n}{labels}\PY{p}{)} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{trainloader}\PY{p}{)}\PY{p}{:}
+         
+                 \PY{c+c1}{\PYZsh{} Move input and label tensors to the GPU}
+                 \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{images}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{,} \PY{n}{labels}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+         
+                 \PY{n}{start} \PY{o}{=} \PY{n}{time}\PY{o}{.}\PY{n}{time}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                 \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+                 \PY{n}{loss}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+         
+                 \PY{k}{if} \PY{n}{ii}\PY{o}{==}\PY{l+m+mi}{3}\PY{p}{:}
+                     \PY{k}{break}
+                 
+             \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Device = }\PY{l+s+si}{\PYZob{}device\PYZcb{}}\PY{l+s+s2}{; Time per batch: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{(time.time() \PYZhy{} start)/3:.3f\PYZcb{} seconds}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Device = cpu; Time per batch: 0.131 seconds
+Device = cuda; Time per batch: 0.001 seconds
+
+    \end{Verbatim}
+
+    \hypertarget{verkon-koulutus}{%
+\subsubsection{Verkon koulutus}\label{verkon-koulutus}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{k+kn}{from} \PY{n+nn}{torch} \PY{k}{import} \PY{n}{nn}\PY{p}{,} \PY{n}{optim}
+         
+         \PY{n}{criterion} \PY{o}{=} \PY{n}{nn}\PY{o}{.}\PY{n}{NLLLoss}\PY{p}{(}\PY{p}{)}
+         \PY{c+c1}{\PYZsh{}criterion = nn.CrossEntropyLoss()}
+         \PY{n}{optimizer} \PY{o}{=} \PY{n}{optim}\PY{o}{.}\PY{n}{Adam}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{,} \PY{n}{lr}\PY{o}{=}\PY{l+m+mf}{0.001}\PY{p}{)}
+         
+         \PY{c+c1}{\PYZsh{} Määritellään koulutuskierrokset}
+         \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{1}
+         \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{0}
+         \PY{n}{print\PYZus{}every} \PY{o}{=} \PY{l+m+mi}{5}
+         \PY{n}{running\PYZus{}train\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+         
+         \PY{c+c1}{\PYZsh{} Luodaan listat virheille}
+         \PY{n}{train\PYZus{}losses}\PY{p}{,} \PY{n}{test\PYZus{}losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+         
+         \PY{k}{for} \PY{n}{epoch} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+             
+             \PY{k}{for} \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o+ow}{in} \PY{n}{trainloader}\PY{p}{:}
+                 \PY{n}{steps} \PY{o}{+}\PY{o}{=} \PY{l+m+mi}{1}
+                 \PY{c+c1}{\PYZsh{} Kuvien muunnos vektorimuotoon view\PYZhy{}metodia käyttäen}
+                 \PY{c+c1}{\PYZsh{} Vektorin pituus on imagen koko (ensimmäisestä alkioista viimeiseen)        }
+                 \PY{c+c1}{\PYZsh{}images = images.view(images.shape[0], \PYZhy{}1)}
+                 \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{images}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{,} \PY{n}{labels}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+                 \PY{n}{optimizer}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{log\PYZus{}ps} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                 \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{log\PYZus{}ps}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+                 \PY{n}{loss}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                 \PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{c+c1}{\PYZsh{} Koulutuskierroksen (epochin) virhe }
+                 \PY{n}{running\PYZus{}train\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                 
+                 \PY{k}{if} \PY{n}{steps} \PY{o}{\PYZpc{}} \PY{n}{print\PYZus{}every} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{running\PYZus{}test\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{running\PYZus{}accuracy} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{model}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}
+                     \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:}    
+                         \PY{k}{for} \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o+ow}{in} \PY{n}{testloader}\PY{p}{:}
+                             \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{images}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{,} \PY{n}{labels}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+                             \PY{c+c1}{\PYZsh{} Muutetaan vektoriksi, jonka pituus on image\PYZhy{}muuttujan koko}
+                             \PY{c+c1}{\PYZsh{}images = images.view(images.shape[0], \PYZhy{}1)}
+         
+                             \PY{n}{output} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                             \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+         
+                             \PY{c+c1}{\PYZsh{} item() \PYZhy{}metodi purkaa loss\PYZhy{}arvon pythonille sopivaksi float\PYZhy{}arvoksi}
+                             \PY{n}{running\PYZus{}test\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+         
+                             \PY{n}{ps} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+                             \PY{n}{top\PYZus{}p}\PY{p}{,} \PY{n}{top\PYZus{}class} \PY{o}{=} \PY{n}{ps}\PY{o}{.}\PY{n}{topk}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                             \PY{n}{equals} \PY{o}{=} \PY{n}{top\PYZus{}class} \PY{o}{==} \PY{n}{labels}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{*}\PY{n}{top\PYZus{}class}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                             
+                             \PY{n}{running\PYZus{}accuracy} \PY{o}{+}\PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{equals}\PY{o}{.}\PY{n}{type}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} Luodaan muuttujat}
+                     \PY{n}{train\PYZus{}loss} \PY{o}{=} \PY{n}{running\PYZus{}train\PYZus{}loss}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trainloader}\PY{p}{)}
+                     \PY{n}{test\PYZus{}loss} \PY{o}{=} \PY{n}{running\PYZus{}test\PYZus{}loss}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{testloader}\PY{p}{)}
+                     \PY{n}{test\PYZus{}accuracy} \PY{o}{=} \PY{n}{running\PYZus{}accuracy}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{testloader}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} Lisätään virheet listoihin}
+                     \PY{n}{train\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train\PYZus{}loss}\PY{p}{)}
+                     \PY{n}{test\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}loss}\PY{p}{)}
+                     \PY{n}{test\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}loss}\PY{p}{)}
+         
+                     \PY{c+c1}{\PYZsh{} Jaetaan oikeat ennusteet siihen käytetyllä datalla}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Device using: }\PY{l+s+si}{\PYZob{}device\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Epoch }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{epoch+1\PYZcb{}/}\PY{l+s+si}{\PYZob{}epochs\PYZcb{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Step}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{steps}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{running\PYZus{}accuracy/len(testloader)*100\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training loss: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{running\PYZus{}train\PYZus{}loss/len(trainloader)*100\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test loss: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{running\PYZus{}test\PYZus{}loss/len(testloader)*100\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                     \PY{n+nb}{print}\PY{p}{(}\PY{p}{)}
+                     
+                     \PY{n}{running\PYZus{}train\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+                     \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+
+        ---------------------------------------------------------------------------
+
+        KeyboardInterrupt                         Traceback (most recent call last)
+
+        <ipython-input-19-b820cce74460> in <module>
+         29 
+         30         \# Koulutuskierroksen (epochin) virhe
+    ---> 31         running\_train\_loss += loss.item()
+         32 
+         33         if steps \% print\_every == 0:
+
+
+        KeyboardInterrupt: 
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} \PY{n}{epochs} \PY{o}{=} \PY{l+m+mi}{5}
+        \PY{n}{steps} \PY{o}{=} \PY{l+m+mi}{0}
+        
+        \PY{n}{train\PYZus{}losses}\PY{p}{,} \PY{n}{test\PYZus{}losses} \PY{o}{=} \PY{p}{[}\PY{p}{]}\PY{p}{,} \PY{p}{[}\PY{p}{]}
+        
+        \PY{k}{for} \PY{n}{e} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{n}{epochs}\PY{p}{)}\PY{p}{:}
+            \PY{n}{running\PYZus{}train\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{c+c1}{\PYZsh{} Harjoitusdata käyttöön}
+            \PY{k}{for} \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o+ow}{in} \PY{n}{trainloader}\PY{p}{:}
+                \PY{n}{model}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+                \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o}{=} \PY{n}{images}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{,} \PY{n}{labels}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Gradienttien nollaus}
+                \PY{n}{optimizer}\PY{o}{.}\PY{n}{zero\PYZus{}grad}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Lasketaan verkon antamat ennusteet}
+                \PY{n}{log\PYZus{}ps} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Lasketaan virhe }
+                \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{log\PYZus{}ps}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Lasketaan gradientit}
+                \PY{n}{loss}\PY{o}{.}\PY{n}{backward}\PY{p}{(}\PY{p}{)}
+                \PY{c+c1}{\PYZsh{} Päivitetään uudet arvot }
+                \PY{n}{optimizer}\PY{o}{.}\PY{n}{step}\PY{p}{(}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Koulutuskierroksen virhe harjoitusdatalla}
+                \PY{n}{running\PYZus{}train\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                        
+            \PY{k}{else}\PY{p}{:}
+                \PY{n}{running\PYZus{}test\PYZus{}loss} \PY{o}{=} \PY{l+m+mi}{0}
+                \PY{n}{running\PYZus{}accuracy} \PY{o}{=} \PY{l+m+mi}{0}
+                
+                \PY{c+c1}{\PYZsh{} Verkko arviointitilaan (evaluointi/validointi)}
+                \PY{n}{model}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}        
+        
+                \PY{c+c1}{\PYZsh{} Gradientin tulee myös olla pois validoinnin aikana}
+                \PY{k}{with} \PY{n}{torch}\PY{o}{.}\PY{n}{no\PYZus{}grad}\PY{p}{(}\PY{p}{)}\PY{p}{:}        
+            
+                    \PY{c+c1}{\PYZsh{} Testidata käyttöön}
+                    \PY{k}{for} \PY{n}{images}\PY{p}{,} \PY{n}{labels} \PY{o+ow}{in} \PY{n}{testloader}\PY{p}{:}
+                        
+                        \PY{n}{output} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{images}\PY{p}{)}
+                        \PY{n}{loss} \PY{o}{=} \PY{n}{criterion}\PY{p}{(}\PY{n}{output}\PY{p}{,} \PY{n}{labels}\PY{p}{)}
+                        
+                        
+                        \PY{c+c1}{\PYZsh{} Koulutuskierroksen virhe testidatalla}
+                        \PY{n}{running\PYZus{}test\PYZus{}loss} \PY{o}{+}\PY{o}{=} \PY{n}{loss}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                        
+                        \PY{n}{ps} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{exp}\PY{p}{(}\PY{n}{output}\PY{p}{)}
+                        \PY{n}{top\PYZus{}p}\PY{p}{,} \PY{n}{top\PYZus{}class} \PY{o}{=} \PY{n}{ps}\PY{o}{.}\PY{n}{topk}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{dim}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+                        
+                        \PY{n}{equals} \PY{o}{=} \PY{n}{top\PYZus{}class} \PY{o}{==} \PY{n}{labels}\PY{o}{.}\PY{n}{view}\PY{p}{(}\PY{o}{*}\PY{n}{top\PYZus{}class}\PY{o}{.}\PY{n}{shape}\PY{p}{)}
+                        
+                        \PY{n}{accuracy} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{equals}\PY{o}{.}\PY{n}{type}\PY{p}{(}\PY{n}{torch}\PY{o}{.}\PY{n}{FloatTensor}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{item}\PY{p}{(}\PY{p}{)}
+                        
+                        \PY{n}{running\PYZus{}accuracy} \PY{o}{+}\PY{o}{=} \PY{n}{accuracy}
+                
+                
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Accuracy: }\PY{l+s+s1}{\PYZob{}}\PY{l+s+s1}{running\PYZus{}accuracy/len(testloader)*100\PYZcb{}}\PY{l+s+s1}{\PYZpc{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    \PY{n+nb}{print}\PY{p}{(}\PY{n}{f}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Training loss: }\PY{l+s+s2}{\PYZob{}}\PY{l+s+s2}{running\PYZus{}train\PYZus{}loss/len(trainloader)*100\PYZcb{}}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+                
+                    \PY{c+c1}{\PYZsh{} Määritellään muuttujiksi}
+                    \PY{n}{test\PYZus{}loss} \PY{o}{=} \PY{n}{running\PYZus{}test\PYZus{}loss}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{testloader}\PY{p}{)}
+                    \PY{n}{train\PYZus{}loss} \PY{o}{=} \PY{n}{running\PYZus{}train\PYZus{}loss}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{trainloader}\PY{p}{)}
+                    \PY{n}{test\PYZus{}accuracy} \PY{o}{=} \PY{n}{running\PYZus{}accuracy}\PY{o}{/}\PY{n+nb}{len}\PY{p}{(}\PY{n}{testloader}\PY{p}{)}
+                
+                    \PY{c+c1}{\PYZsh{} Lisätään listoihin}
+                    \PY{n}{train\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{train\PYZus{}loss}\PY{p}{)}
+                    \PY{n}{test\PYZus{}losses}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{test\PYZus{}loss}\PY{p}{)}
+                
+                \PY{c+c1}{\PYZsh{} Verkko takisin harjoitustilaan}
+                \PY{n}{model}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    Koulutus/validointiloopit eivät enää toimi näillä nykyisillä verkoilla.
+Prosessi lähtee käyntiin eikä erroreita tule, mutta jäsähtää
+raksuttamaan ja ei eitene mihinkään pidemmänkään odottelun jälkeen.
+
+    \hypertarget{reflection}{%
+\subsection{Reflection}\label{reflection}}
+
+Answer briefly following questions (in English or Finnish): - What is
+torchvision? - Why to use data augmentation? - Why to use image resize
+function? - Why to use data normalization to image data?
+
+    \emph{Your answers here\ldots{}}
+
+    \hypertarget{what-is-torchvision}{%
+\subsubsection{What is torchvision?}\label{what-is-torchvision}}
+
+Pytorchissa oleva kirjasto, joka on tarkoitettu kuvien tunnistamiseen ja
+luokitteluun. Kirjasto sisältää mm. datasettejä, modeleita, kuvien
+muokkaamiseen käytettäviä metodeja ja konenäon.
+
+\hypertarget{why-to-use-data-augmentation}{%
+\subsubsection{Why to use data
+augmentation?}\label{why-to-use-data-augmentation}}
+
+Neuroverkkojen koulutukseen kuuluu aiheuttaa satunnaisuutta
+koulutusdataan. Tätä tehdään esimerkiksi muokkaamalla kuvia
+kääntelemällä, peilailemalla ja rajaamalla niitä. Tämä auttaa verkkoa
+oppimaan.
+
+\hypertarget{why-to-use-image-resize-function}{%
+\subsubsection{Why to use image resize
+function?}\label{why-to-use-image-resize-function}}
+
+Kuvien täytyy olla samankokoisia koulutuksessa.
+
+\hypertarget{why-to-use-data-normalization-to-image-data}{%
+\subsubsection{Why to use data normalization to image
+data?}\label{why-to-use-data-normalization-to-image-data}}
+
+Haluamme normalisoida kuvien värikanavat, joita on 3 jos väriluokka on
+RGB. Ilman normalisointia verkot eivät yleensä opi, ei ainakaan yhtä
+hyvin. Normalisointi pitää painoarvot (weights) lähellä nollaa.
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
